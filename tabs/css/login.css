@@ -1,0 +1,50 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url(../img/oxxoBackground.jpg);
+    background-repeat: no-repeat;
+    ;
+    backdrop-filter: blur(8px);
+}
+
+.formContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 260px;
+    background-color: white;
+    box-shadow: 0 9px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 10px;
+
+}
+
+.mainContainer {
+    width: 100vw;
+    height: 100vh;
+}
+
+#submitBtn {
+    background-color: rgb(220, 53, 69);
+    border: none;
+    color: white;
+    display: inline;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#submitBtn:hover {
+    background-color: rgb(218, 3, 25);
+    font-weight: bold;
+}
+
+#registerLink {
+    text-decoration: none;
+    color: black;
+}
+
+#registerLink:hover {
+    text-decoration: underline;
+    color: rgb(199, 3, 3);
+}

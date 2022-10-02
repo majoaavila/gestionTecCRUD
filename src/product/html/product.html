@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OXXO</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script> -->
+<script src="../js/checkbox.js" ></script>
+
+</head>
+<body>
+    <div class="container">
+		<div class="table-responsive">
+			<div class="table-wrapper">
+				<div class="table-title">
+					<div class="row">
+						<div class="col-xs-6">
+							<h2><b>Productos</b></h2>
+						</div>
+						<div class="col-xs-6">
+							<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Nuevo producto</span></a>
+							<a href="#deleteProductModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Eliminar</span></a>						
+						</div>
+					</div>
+				</div>
+				<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="selectAll">
+									<label for="selectAll"></label>
+								</span>
+							</th>
+							<th>ID</th>
+							<th>Código de barras</th>
+							<th>Nombre</th>
+							<th>Categoría</th>
+							<th>Lote</th>
+							<th>Fecha de caducidad</th>
+							<th>Precio compra</th>
+							<th>Precio venta</th>
+							<th>Unidades</th>
+							<th>ID proveedor</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox1" name="options[]" value="1">
+									<label for="checkbox1"></label>
+								</span>
+							</td>
+							<td>3131</td>
+							<td>7502103434890</td>
+							<td>Gansito</td>
+							<td>Golosinas</td>
+							<td>202209301030P03M47</td>
+							<td>2022-12-30</td>
+							<td>$10.00</td>
+							<td>$15.00</td>
+							<td>50</td>
+							<td>1</td>
+							<td>
+								<a href="#editProductModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteProductModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span class="custom-checkbox">
+									<input type="checkbox" id="checkbox1" name="options[]" value="1">
+									<label for="checkbox1"></label>
+								</span>
+							</td>
+							<td>3131</td>
+							<td>7502103434890</td>
+							<td>Gansito</td>
+							<td>Golosinas</td>
+							<td>202209301030P03M47</td>
+							<td>2022-12-30</td>
+							<td>$10.00</td>
+							<td>$15.00</td>
+							<td>50</td>
+							<td>1</td>
+							<td>
+								<a href="#editProductModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+								<a href="#deleteProductModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+							</td>
+						</tr> 
+					</tbody>
+				</table>
+				<div class="clearfix">
+					<div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+					<ul class="pagination">
+						<li class="page-item disabled"><a href="#">Previous</a></li>
+						<li class="page-item active"><a href="#" class="page-link">1</a></li>
+						<li class="page-item"><a href="#" class="page-link">2</a></li>
+						<li class="page-item"><a href="#" class="page-link">3</a></li>
+						<li class="page-item"><a href="#" class="page-link">4</a></li>
+						<li class="page-item"><a href="#" class="page-link">5</a></li>
+						<li class="page-item"><a href="#" class="page-link">Next</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>        
+    </div>
+	<!-- modalsss -->
+    <!-- modal agregar producto -->
+	<div id="addProductModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Agregar producto</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>Código de barras</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Nombre</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+                            <label>Categoría</label>
+                            <select class="form-control">
+                                <option>Bebidas</option>
+                                <option>Comida enlatada</option>
+                                <option>Golosinas</option>
+								<option>Botanas</option>
+								<option>Salud y cuidado personal</option>
+								<option>Hogar y limpieza</option>
+								<option>Electrónicos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Lote</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+							<label>Fecha de caducidad</label>
+							<input type="date" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Precio de compra</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Precio de venta</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Cantidad</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<!-- usar id de proveedor -->
+							<label>Proveedor</label>
+							<input type="text" class="form-control" required>
+						</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-success" value="Agregar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- modal editar -->
+	<!-- no me sirve modal editar -->
+	<div id="editProductModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Editar producto</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<div class="form-group">
+							<label>Código de barras</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Nombre</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+                            <label>Categoría</label>
+                            <select class="form-control">
+                                <option>Bebidas</option>
+                                <option>Comida enlatada</option>
+                                <option>Golosinas</option>
+								<option>Botanas</option>
+								<option>Salud y cuidado personal</option>
+								<option>Hogar y limpieza</option>
+								<option>Desechables</option>
+								<option>Abarrotes</option>
+								<option>Bebidas alcohólicas</option>
+								<option>Electrónicos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Lote</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+							<label>Fecha de caducidad</label>
+							<input type="date" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Precio de compra</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Precio de venta</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>Cantidad</label>
+							<input type="text" class="form-control" required>
+						</div>
+						<div class="form-group">
+							<!-- usar id de proveedor -->
+							<label>Proveedor</label>
+							<input type="text" class="form-control" required>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-success" value="Agregar">
+					</div>				
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- modal eliminar -->
+	<div id="deleteProductModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Eliminar Producto</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">					
+						<p>¿Seguro que deseas eliminar el producto</p>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="submit" class="btn btn-danger" value="Eliminar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
