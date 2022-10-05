@@ -1,0 +1,19 @@
+    <nav class="navbar navbar-expand-lg bg-danger d-flex">
+      <div class="container-fluid justify-content-center">
+        <%= image_tag "logoOxxo.png", width: "10%" %>
+        <h2 class="text-white fw-bold px-4">Administración</h2>
+      </div>
+    </nav>
+
+    <div>
+      <div class="wrapper">
+        <div class="tabs_wrap">
+          <ul>
+            <li data-tabs="client">  <%= link_to "Clientes", clients_path, class:"nav-links"%></li>
+            <li data-tabs="employee">Empleados</li>
+            <li data-tabs="product">Productos</li>
+            <li data-tabs="supplier">Proveedores</li>
+          </ul>
+        </div>
+      </div>
+    </div>

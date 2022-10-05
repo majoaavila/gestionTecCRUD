@@ -7,10 +7,17 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application',
+'https://fonts.googleapis.com/css?family=Roboto|Varela+Round',
+ media: 'all', 'data-turbolinks-track' => true %>
+ <%= stylesheet_link_tag 'application',
+'https://fonts.googleapis.com/icon?family=Material+Icons',
+ media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+  <%=render "layouts/nav"%>
     <%= yield %>
   </body>
 </html>
