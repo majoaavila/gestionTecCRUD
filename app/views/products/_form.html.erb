@@ -1,0 +1,64 @@
+<%= form_with(model: product) do |form| %>
+  <% if product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :bar_code, "Codigo de barras",style: "display: block" %>
+    <%= form.number_field :bar_code, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :name, "Nombre",style: "display: block" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :category, "Categoria",style: "display: block" %>
+    <%= form.select(:Sex, ["Bebidas", "Comida enlatada", "Golosinas","Botanas","Salud y cuidado personal","Hogar y limpieza", 
+    "Desechables", "Abarrotes", "Bebidas alcohólicas", "Electrónicos"], {},{class: "form-control"} )%>
+  </div>
+
+  <div>
+    <%= form.label :batch, "Lote",style: "display: block" %>
+    <%= form.text_field :batch, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :exp_date, "Fecha de expiracion",style: "display: block" %>
+    <%= form.date_field :exp_date, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :buying_price, "Precio de compra",style: "display: block" %>
+    <%= form.text_field :buying_price, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :selling_price, "Precio de venta",style: "display: block" %>
+    <%= form.number_field :selling_price, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :units, "Unidades",style: "display: block" %>
+    <%= form.number_field :units, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.label :supplier_id, style: "display: block" %>
+    <%= form.collection_select :supplier_id, Supplier.order(:name),:id,:name,{},{class: "form-control"} %>
+  </div>
+
+  <div class="modal-footer">
+    <%= link_to "Cancelar", products_path, class: "btn btn-default" %>
+    <%= form.submit "Crear producto", class: "btn btn-success" %>
+  </div>
+<% end %>

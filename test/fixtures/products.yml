@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  bar_code: 
+  name: MyString
+  category: MyString
+  batch: MyString
+  exp_date: 2022-10-07
+  buying_price: 
+  selling_price: 
+  units: 1
+  supplier: one
+
+two:
+  bar_code: 
+  name: MyString
+  category: MyString
+  batch: MyString
+  exp_date: 2022-10-07
+  buying_price: 
+  selling_price: 
+  units: 1
+  supplier: two
