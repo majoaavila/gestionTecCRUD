@@ -1,7 +1,7 @@
 <%= form_with(model: client) do |form| %>
   <% if client.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(client.errors.count, "error") %> prohibited this client from being saved:</h2>
+      <h2><%= pluralize(client.errors.count, "error") %> Errores </h2>
 
       <ul>
         <% client.errors.each do |error| %>
@@ -11,77 +11,74 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :Name, style: "display: block" %>
-    <%= form.text_field :Name %>
+  <div class="modal-body">
+    <%= form.label :Name, "Nombre", style: "display: block" %>
+    <%= form.text_field :Name, class: "form-control", class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :LastName, style: "display: block" %>
-    <%= form.text_field :LastName %>
+    <%= form.label :LastName, "Apellido", style: "display: block" %>
+    <%= form.text_field :LastName, class: "form-control", class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :Sex, style: "display: block" %>
-    <%= form.text_field :Sex %>
+    <%= form.label :Sex,"Genero", style: "display: block" %>
+    <%= form.select(:Sex, ["Masculino", "Femenino", "No binario"], {},{class: "form-control"} )%>
   </div>
 
   <div>
-    <%= form.label :birthDate, style: "display: block" %>
-    <%= form.date_field :birthDate %>
+    <%= form.label :birthDate, "Fecha de nacimiento", style: "display: block" %>
+    <%= form.date_field :birthDate, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.label :email,"Correo electronico" ,style: "display: block" %>
+    <%= form.text_field :email, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :phone, style: "display: block" %>
-    <%= form.text_field :phone %>
+    <%= form.label :phone, "Celular",style: "display: block" %>
+    <%= form.telephone_field  :phone, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :state, style: "display: block" %>
-    <%= form.text_field :state %>
+    <%= form.label :state, "Estado",style: "display: block" %>
+    <%= form.text_field :state, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
+    <%= form.label :city, "Ciudad",style: "display: block" %>
+    <%= form.text_field :city, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :colony, style: "display: block" %>
-    <%= form.text_field :colony %>
+    <%= form.label :colony, "Colonia",style: "display: block" %>
+    <%= form.text_field :colony, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :street, style: "display: block" %>
-    <%= form.text_field :street %>
+    <%= form.label :street, "Calle",style: "display: block" %>
+    <%= form.text_field :street, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :houseNumber, style: "display: block" %>
-    <%= form.text_field :houseNumber %>
+    <%= form.label :houseNumber, "Numero de casa",style: "display: block" %>
+    <%= form.text_field :houseNumber, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :cp, style: "display: block" %>
-    <%= form.text_field :cp %>
+    <%= form.label :cp, "Codigo postal",style: "display: block" %>
+    <%= form.text_field :cp, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :puntos, style: "display: block" %>
-    <%= form.text_field :puntos %>
+    <%= form.label :puntos, "Puntos",style: "display: block" %>
+    <%= form.text_field :puntos, class: "form-control" %>
   </div>
-
   <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.check_box :status %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="modal-footer">
+  <%= link_to "Cancelar", clients_path, class: "btn btn-default" %>
+    <%= form.submit "Crear cliente", class: "btn btn-success" %>
+    </div>
   </div>
 <% end %>
