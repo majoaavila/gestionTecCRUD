@@ -45,6 +45,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_07_071749) do
     t.integer "salary"
   end
 
+  create_table "names", force: :cascade do |t|
+    t.string "LastName"
+    t.string "Sex"
+    t.date "birthDate"
+    t.string "email"
+    t.bigint "phone"
+    t.string "state"
+    t.string "city"
+    t.string "colony"
+    t.string "street"
+    t.string "houseNumber"
+    t.bigint "cp"
+    t.bigint "puntos"
+    t.boolean "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.bigint "bar_code"
     t.string "name"
