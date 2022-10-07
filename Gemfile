@@ -74,3 +74,5 @@ end
 gem "bootstrap", "~> 5.2"
 
 gem "jquery-rails", "~> 4.5"
+
+gem "devise", "~> 4.8"
