@@ -35,6 +35,14 @@
     <%= form.label :shift, "Turno",style: "display: block" %>
     <%= form.select(:shift, ["Matutino", "Vespertino", "Mixto"], {},{class: "form-control"} )%>
   </div>
+  <div>
+    <%= form.label :phone, "Telefono", style: "display: block" %>
+    <%= form.number_field :phone, class: "form-control" %>
+  </div>
+<div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email, class: "form-control" %>
+  </div>
   <%# <div>
     <%= form.label :salary, "Salario",style: "display: block" >
     <%= form.number_field :salary, class: "form-control" >
