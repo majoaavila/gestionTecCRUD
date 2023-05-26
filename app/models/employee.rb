@@ -1,4 +1,6 @@
 class Employee < ApplicationRecord
+    devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+
     def salary
        if self[:position] == "Líder de tienda"
         self[:salary] = 12300

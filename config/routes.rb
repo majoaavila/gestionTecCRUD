@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :employees
   resources :employees
   resources :products
   resources :suppliers
