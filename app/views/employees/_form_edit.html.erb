@@ -22,13 +22,8 @@
   </div>
 
   <div>
-     <%= form.label :sex,"Genero", style: "display: block" %>
-    <%= form.select(:sex, ["Masculino", "Femenino", "No binario"], {},{class: "form-control"} )%>
-  </div>
-
-  <div>
-    <%= form.label :position, "Posicion",style: "display: block" %>
-    <%= form.select(:position, [ "Líder de tienda", "Encargado de turno", "Ayudante de tienda"], {},{class: "form-control"} )%>
+    <%= form.label :admin, "Posicion",style: "display: block" %>
+    <%= form.check_box :admin %>
   </div>
 
   <div>
@@ -50,6 +45,10 @@
     <%= form.radio_button :status, false %>
     <%= form.label :status_inactive, "Inactivo" %>
   </div>
+
+  <%= form.label :current_password,class: "form-label" %>
+  <%= form.password_field :current_password,  class: "form-control", id: "client_current_password" %>
+
   <div class="modal-footer">
     <%= link_to "Cancelar", employees_path, class: "btn btn-default" %>
     <%= form.submit "Confirmar", class: "btn btn-success" %>

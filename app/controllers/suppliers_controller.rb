@@ -1,5 +1,19 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only: %i[ show edit update destroy ]
+  before_action :set_supplier, only: %i[ show edit update destroy confirm_password]
+  before_action :authenticate_employee!
+  before_action :admin_only, only: %i[ edit update new create destroy confirm_password ]
+  def confirm_password
+    params = supplier_params
+    if current_employee.valid_password?(params[:current_password])
+      # Password matches
+      # Perform the desired action (e.g., delete employee)
+      @supplier.destroy
+      redirect_to suppliers_path, notice: "Supplier successfully deleted along with theirs products."
+    else
+      # Password doesn't match
+      redirect_to suppliers_path, alert: "Incorrect password."
+    end
+  end
 
   # GET /suppliers or /suppliers.json
   def index
@@ -36,14 +50,24 @@ class SuppliersController < ApplicationController
 
   # PATCH/PUT /suppliers/1 or /suppliers/1.json
   def update
-    respond_to do |format|
-      if @supplier.update(supplier_params)
-        format.html { redirect_to suppliers_path, notice: "Supplier was successfully updated." }
-        format.json { render :show, status: :ok, location: @supplier }
+    params = supplier_params
+    if params[:current_password].present?
+      if current_employee.valid_password?(params[:current_password])
+        params.delete(:current_password)
+        respond_to do |format|
+          if @supplier.update(params)
+            format.html { redirect_to suppliers_path, notice: "Supplier was successfully updated." }
+            format.json { render :show, status: :ok, location: @supplier }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @supplier.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @supplier.errors, status: :unprocessable_entity }
+        redirect_to edit_supplier_path(@supplier), alert: "Password is incorrect"
       end
+    else
+      redirect_to edit_supplier_path(@supplier), alert: "Please enter your current password"
     end
   end
 
@@ -65,6 +89,12 @@ class SuppliersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def supplier_params
-      params.require(:supplier).permit(:name, :email, :phone, :arrive_date, :rfc)
+      params.require(:supplier).permit(:name, :email, :phone, :arrive_date, :rfc, :current_password)
+    end
+
+    def admin_only
+      unless current_employee.admin?
+        redirect_to suppliers_path, :alert => "Access denied."
+      end
     end
 end

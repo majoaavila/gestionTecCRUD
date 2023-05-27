@@ -83,6 +83,10 @@
     <%= form.label :status_inactive, "Inactivo" %>
   </div>
   <div>
+  <div>
+    <%= form.label :current_password,class: "form-label" %>
+    <%= form.password_field :current_password,  class: "form-control", id: "client_current_password" %>
+  </div>
   <div class="modal-footer">
   <%= link_to "Cancelar", clients_path, class: "btn btn-default" %>
     <%= form.submit "Confirmar", class: "btn btn-success" %>

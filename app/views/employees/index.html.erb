@@ -7,8 +7,10 @@
 							<h2><b>Empleados</b></h2>
 						</div>
 						<div class="col-xs-6">
+						<%if current_employee.admin?%>
 						<%= link_to new_employee_path, class: "btn btn-success" do %>
 							<i class="material-icons">&#xE147;</i> <span>Nuevo empleados</span>
+							<%end%>
 							<%end%>
 						</div>
 					</div>
@@ -20,7 +22,7 @@
               				<th>ID</th>
 							<th>Nombre</th>
 							<th>Apellido</th>
-							<th>Sexo</th>
+
 							<th>Telefono</th>
 							<th>Correo</th>
 							<th>Puesto</th>
@@ -35,24 +37,42 @@
               <td><%=employee.id%></td>
 							<td><%=employee.name%></td>
               <td><%=employee.last_name%></td>
-              <td><%=employee.sex%></td>
 			  <td><%=employee.phone%></td>
 			  <td><%=employee.email%></td>
-              <td><%=employee.position%></td>
+              <td><%=employee.admin ? "Admin" : "Empleado"%></td>
               <td><%=employee.shift%></td>
               <td>$<%=employee.salary%></td>
               <td><%=employee.status ? "Activo" : "Inactivo"%></td>
+			  <%if current_employee.admin?%>
               	<td>
 								<%= link_to edit_employee_path(employee.id), class: "edit" do%>
 								<i class="material-icons edit" data-toggle="tooltip" title="Edit">&#xE254;</i>
 								<%end%>
-								<%= link_to employee, method: :delete, class: "delete", :data => { :confirm => "Seguro que quieres borrar a #{employee.name}" } do%>
+								 <button onclick=<%="togglePasswordInput(#{employee.id})"%>  class="btn btn-danger" id="delete-employee-btn">
 								<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-								<%end%>
+								</button>
+								<div id=<%="password-input-#{employee.id}"%> style="display: none;">
+                   <%= form_tag confirm_password_employees_path(employee.id), data:{controller: "delete-employee"},method: :post do %>
+                      <%= label_tag :password, "Enter your password:" %>
+                      <%= password_field_tag :password, nil, class: "form-control", data:{ delete_employee_target:"password"} %>
+                      <%= submit_tag "Confirm", class: "btn btn-primary", id: "delete-employee", data:{ action: "click->delete-employee#login"} %>
+                </div>
+              <%end%>
 							</td>
+							<%end%>
             <% end %>
 						</tr>
 					</tbody>
 				</table>
 		</div>
     </div>
+<script>
+   function togglePasswordInput(id) {
+    let passwordInput = document.getElementById(`password-input-${id}`);
+    if (passwordInput.style.display === "none") {
+      passwordInput.style.display = "block";
+    } else {
+      passwordInput.style.display = "none";
+    }
+  }
+</script>

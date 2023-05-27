@@ -35,7 +35,12 @@
     <%= form.label :rfc, style: "display: block" %>
     <%= form.text_field :rfc, class: "form-control"  %>
   </div>
-
+<%if current_page?(edit_supplier_path)%>
+   <div>
+    <%= form.label :current_password,class: "form-label" %>
+    <%= form.password_field :current_password,  class: "form-control", id: "client_current_password" %>
+  </div>
+  <%end%>
   <div class="modal-footer">
     <%= link_to "Cancelar", suppliers_path, class: "btn btn-default" %>
     <%= form.submit "Confirmar", class: "btn btn-success" %>

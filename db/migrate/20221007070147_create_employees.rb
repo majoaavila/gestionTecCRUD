@@ -4,10 +4,9 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :last_name
       t.string :sex
-      t.string :position
       t.string :shift
       t.boolean :status
-      t.boolean :admin
+      t.boolean :admin, default: false
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.timestamps null: false
@@ -15,6 +14,13 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
        ## Recoverable
        t.string   :reset_password_token
        t.datetime :reset_password_sent_at
+       ## Trackable
+       t.integer  :sign_in_count, default: 0, null: false
+       t.datetime :current_sign_in_at
+       t.datetime :last_sign_in_at
+       t.inet     :current_sign_in_ip
+       t.inet     :last_sign_in_ip
+
     end
     add_index :employees, :email,                unique: true
     add_index :employees, :reset_password_token, unique: true

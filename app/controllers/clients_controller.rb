@@ -1,5 +1,19 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[ show edit update destroy ]
+  before_action :set_client, only: %i[ show edit update destroy confirm_password ]
+  before_action :authenticate_employee!
+  before_action :authenticate_admin!, only: %i[  destroy confirm_password ]
+  def confirm_password
+
+    if current_employee.valid_password?(params[:password])
+      # Password matches
+      # Perform the desired action (e.g., delete employee)
+      @client.destroy
+      redirect_to clients_path, notice: "Client successfully deleted."
+    else
+      # Password doesn't match
+      redirect_to clients_path, alert: "Incorrect password."
+    end
+  end
 
   # GET /clients or /clients.json
   def index
@@ -36,14 +50,24 @@ class ClientsController < ApplicationController
 
   # PATCH/PUT /clients/1 or /clients/1.json
   def update
-    respond_to do |format|
-      if @client.update(client_params)
-        format.html { redirect_to clients_path, notice: "Client was successfully updated." }
-        format.json { render :show, status: :ok, location: @client }
+    params = client_params
+    if params[:current_password].present?
+      if current_employee.valid_password?(params[:current_password])
+        params.delete(:current_password)
+        respond_to do |format|
+          if @client.update(params)
+            format.html { redirect_to clients_path, notice: "Client was successfully updated." }
+            format.json { render :show, status: :ok, location: @client }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @client.errors, status: :unprocessable_entity }
+          end
+        end
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+        redirect_to edit_client_path(@client), alert: "Password is incorrect"
       end
+    else
+      redirect_to edit_client_path(@client), alert: "Please enter your current password"
     end
   end
 
@@ -65,6 +89,12 @@ class ClientsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def client_params
-      params.require(:client).permit(:Name, :LastName, :Sex, :birthDate, :email, :phone, :state, :city, :colony, :street, :houseNumber, :cp, :puntos, :status)
+      params.require(:client).permit(:Name, :LastName, :birthDate, :email, :phone, :state, :city, :colony, :street, :houseNumber, :cp, 
+        :puntos, :status, :current_password)
+    end
+    def admin_only
+      unless current_employee.admin?
+        redirect_to clients_path, :alert => "Access denied."
+      end
     end
 end

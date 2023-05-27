@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_09_001433) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_27_025259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clients", force: :cascade do |t|
     t.string "Name"
     t.string "LastName"
-    t.string "Sex"
     t.date "birthDate"
     t.string "email"
     t.bigint "phone"
@@ -36,11 +35,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_09_001433) do
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "last_name"
-    t.string "sex"
-    t.string "position"
     t.string "shift"
     t.boolean "status", default: true
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", null: false
@@ -48,6 +45,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_09_001433) do
     t.datetime "remember_created_at"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.integer "salary"
     t.bigint "phone"
     t.index ["email"], name: "index_employees_on_email", unique: true

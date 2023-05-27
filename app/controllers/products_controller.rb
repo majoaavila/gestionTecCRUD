@@ -1,5 +1,18 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, only: %i[ show edit update destroy confirm_password]
+  before_action :authenticate_employee!
+  def confirm_password
+    params = product_params
+    if current_employee.valid_password?(params[:current_password])
+      # Password matches
+      # Perform the desired action (e.g., delete employee)
+      @product.destroy
+      redirect_to products_path, notice: "Product successfully deleted."
+    else
+      # Password doesn't match
+      redirect_to products_path, alert: "Incorrect password."
+    end
+  end
 
   # GET /products or /products.json
   def index
@@ -36,6 +49,10 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/1 or /products/1.json
   def update
+    params = product_params
+    if params[:current_password].present?
+      if current_employee.valid_password?(params[:current_password])
+        params.delete(:current_password)
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to products_path, notice: "Product was successfully updated." }
@@ -45,6 +62,12 @@ class ProductsController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+  else
+    redirect_to edit_product_path(@product), alert: "Password is incorrect"
+  end
+else
+  redirect_to edit_product_path(@product), alert: "Please enter your current password"
+end
   end
 
   # DELETE /products/1 or /products/1.json
@@ -65,6 +88,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:bar_code, :name, :category, :batch, :exp_date, :buying_price, :selling_price, :units, :supplier_id)
+      params.require(:product).permit(:bar_code, :name, :category, :batch, :exp_date, :buying_price, :selling_price, :units, :supplier_id, :current_password)
     end
 end

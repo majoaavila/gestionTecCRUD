@@ -3,6 +3,13 @@
         <%= image_tag "logoOxxo.png", width: "10%" %>
         <h2 class="text-white fw-bold px-4">Administración</h2>
       </div>
+       <%= button_to(
+        "Log Out",
+        destroy_employee_session_path,
+        method: :delete,
+        class: "btn btn-secondary"
+      ) %>
+
     </nav>
 
     <div>

@@ -46,9 +46,16 @@
 								<%= link_to edit_product_path(product.id), class: "edit" do%>
 								<i class="material-icons edit" data-toggle="tooltip" title="Edit">&#xE254;</i>
 								<%end%>
-								<%= link_to product, method: :delete, class: "delete", :data => { :confirm => "Seguro que quieres borrar a #{product.name}" } do%>
+								 <button onclick=<%="togglePasswordInput(#{product.id})"%>  class="btn btn-danger" id="delete-product-btn">
 								<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
-								<%end%>
+								</button>
+								<div id=<%="password-input-#{product.id}"%> style="display: none;">
+                   <%= form_for product, as: :product, url: confirm_password_products_path(product.id),method: :post do |f|%>
+                      <%= f.label :current_password, "Enter your password:" %>
+                      <%= f.password_field  :current_password,  class: "form-control", data:{ delete_product_target:"password"} %>
+                      <%= f.submit   "Confirm", class: "btn btn-primary", id: "delete-product", data:{ action: "click->delete-product#login"} %>
+                </div>
+              <%end%>
 							</td>
             <% end %>
 						</tr>
@@ -56,3 +63,13 @@
 				</table>
 		</div>
     </div>
+<script>
+   function togglePasswordInput(id) {
+    let passwordInput = document.getElementById(`password-input-${id}`);
+    if (passwordInput.style.display === "none") {
+      passwordInput.style.display = "block";
+    } else {
+      passwordInput.style.display = "none";
+    }
+  }
+</script>

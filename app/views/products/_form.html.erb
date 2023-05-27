@@ -56,7 +56,12 @@
     <%= form.label :supplier_id, style: "display: block" %>
     <%= form.collection_select :supplier_id, Supplier.order(:name),:id,:name,{},{class: "form-control"} %>
   </div>
-
+  <%if current_page?(edit_product_path)%>
+   <div>
+    <%= form.label :current_password,class: "form-label" %>
+    <%= form.password_field :current_password,  class: "form-control", id: "client_current_password" %>
+  </div>
+  <%end%>
   <div class="modal-footer">
     <%= link_to "Cancelar", products_path, class: "btn btn-default" %>
     <%= form.submit "Confirmar", class: "btn btn-success" %>
