@@ -83,4 +83,4 @@ production:
   <<: *default
   database: sgsiAmor_production
   username: sgsiAmor
-  password: <%= ENV["SGSIAMOR_DATABASE_PASSWORD"] %>
+  password: <%= ENV["DATABASE_URL"] %>
