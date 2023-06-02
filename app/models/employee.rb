@@ -1,6 +1,6 @@
 class Employee < ApplicationRecord
     devise :database_authenticatable,
-    :recoverable, :rememberable, :trackable, :validatable, :registerable
+    :recoverable, :rememberable, :trackable, :validatable
 
     def salary
        if self[:admin]
