@@ -61,8 +61,8 @@
 								<div id=<%="password-input-#{client.id}"%> style="display: none;">
                    <%= form_tag confirm_password_clients_path(client.id), data:{controller: "delete-client"},method: :delete do %>
                       <%= label_tag :password, "Enter your password:" %>
-                      <%= password_field_tag :password, nil, class: "form-control", data:{ delete_client_target:"password"} %>
-                      <%= submit_tag "Confirm", class: "btn btn-primary", id: "delete-client", data:{ action: "click->delete-client#login"} %>
+                      <%= password_field_tag :password, nil, class: "form-control" %>
+                      <%= submit_tag "Confirm", class: "btn btn-primary", id: "delete-client" %>
                 </div>
               <%end%>
 			  <%end%>
