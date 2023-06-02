@@ -59,7 +59,7 @@
 								<i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
 								</button>
 								<div id=<%="password-input-#{client.id}"%> style="display: none;">
-                   <%= form_tag confirm_password_clients_path(client.id), data:{controller: "delete-client"},method: :delete do %>
+                   <%= form_tag confirm_password_clients_path(client.id),method: :delete do %>
                       <%= label_tag :password, "Enter your password:" %>
                       <%= password_field_tag :password, nil, class: "form-control" %>
                       <%= submit_tag "Confirm", class: "btn btn-primary", id: "delete-client" %>
